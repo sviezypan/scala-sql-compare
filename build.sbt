@@ -64,10 +64,8 @@ lazy val ziosql = (project in file("ziosql"))
   .settings(commonSettings)
   .settings(
     libraryDependencies ++= Seq(
-      "dev.zio" %% "zio-sql-postgres" % "0.0.1",
-      "dev.zio" %% "zio" % "2.0.0-RC2",
-      "dev.zio" %% "zio-schema" % "0.1.7",
-      "dev.zio" %% "zio-schema-derivation" % "0.1.7",
+      "dev.zio" %% "zio-sql-postgres" % "0.1.0",
+      "dev.zio" %% "zio" % "2.0.3",
       "org.postgresql"     % "postgresql"                      % "42.2.24"                  % Compile,
       "com.dimafeng"      %% "testcontainers-scala-postgresql" % "0.39.12"
     )
