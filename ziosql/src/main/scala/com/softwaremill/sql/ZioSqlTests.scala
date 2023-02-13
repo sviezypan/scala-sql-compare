@@ -182,19 +182,17 @@ object ZioSqlTests extends ZIOAppDefault with TableModel {
   val maxStations: Option[Int] = None
   val sortDesc: Boolean = true
 
-  val minStationsQuery =
-    minStations.map(m => stationCount >= m).getOrElse(Expr.literal(true))
-  val maxStationsQuery =
-    maxStations.map(m => trackType <= m).getOrElse(Expr.literal(true))
-
   val ord =
     if (sortDesc)
       stationCount.desc
     else
       stationCount.asc
 
-  val whereExpr =
-    minStationsQuery && maxStationsQuery
+  val whereExpr = List(
+    minStations.map(m => stationCount >= m),
+    maxStations.map(m => trackType <= m)
+  ).flatten
+    .fold(Expr.literal(true))(_ && _)
 
   val finalQuery = base.where(whereExpr).orderBy(ord)
 
